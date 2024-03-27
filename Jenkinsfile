@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         REGISTRY_CREDENTIALS = credentials('docker-hub-creds') // Use the ID you set for your Docker Hub credentials
-        IMAGE_TAG = "${BUILD_NUMBER}"
+        DOCKER_IMAGE = "vikramvimal/cicd-e2e:${BUILD_NUMBER}"
     }
     
     stages {
@@ -23,7 +23,7 @@ pipeline {
         script{
                     sh '''
                     echo 'Buid Docker Image'
-                    docker build -t vikramvimal/cicd-e2e:${BUILD_NUMBER} .
+                    docker build -t ${DOCKER_IMAGE} .
                     docker.withRegistry('https://index.docker.io/v1/', "docker-hub-creds") {
                       dockerImage.push()
                     }
