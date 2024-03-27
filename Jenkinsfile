@@ -10,34 +10,30 @@ pipeline {
         
         stage('Checkout'){
            steps {
-                git credentialsId: '24f6aa2e-349f-4fa0-ac73-d2c2acf8ab81', 
-                url: 'https://github.com/vikramvimal/cicd-end-to-end',
-                branch: 'main'
+                sh 'echo passed'
+                // url: 'https://github.com/vikramvimal/cicd-end-to-end.git',
+                // branch: 'main'
            }
         }
         
-                    
-        stage('Build Docker'){
-            steps{
-                script{
-                    sh '''
-                    echo 'Buid Docker Image'
-                    docker build -t vikramvimal/cicd-e2e:${BUILD_NUMBER} .
-                    '''
-                }
-            }
-        }
 
-        stage('Push the artifacts'){
-           steps{
-                script{
-                    sh '''
-                    echo 'Push to Repo'
-                    docker push vikramvimal/cicd-e2e:${BUILD_NUMBER}
-                    '''
-                }
+    stage('Build and Push Docker Image') {
+      environment {
+        DOCKER_IMAGE = "vikramvimal/cicd-e2e:${BUILD_NUMBER}"
+        REGISTRY_CREDENTIALS = credentials('docker-cred')
+      }
+      steps {
+        script {
+            docker build -t ${DOCKER_IMAGE} .'
+            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+                dockerImage.push()
             }
         }
+      }
+    }
+
+
         
         // stage('Checkout K8S manifest SCM'){
         //     steps {
