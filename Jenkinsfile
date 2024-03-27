@@ -24,7 +24,7 @@ pipeline {
                     sh '''
                     echo 'Buid Docker Image'
                     docker build -t vikramvimal/cicd-e2e:${BUILD_NUMBER} .
-                    docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+                    docker.withRegistry('https://index.docker.io/v1/', "docker-hub-creds") {
                       docker push vikramvimal/cicd-e2e:${BUILD_NUMBER}
                     }
                     '''
