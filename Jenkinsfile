@@ -38,30 +38,30 @@ pipeline {
             }
         }
         
-        stage('Checkout K8S manifest SCM'){
-            steps {
-                git credentialsId: 'c8504e4b-0804-4553-8ca8-9baa671c16e5', 
-                url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo.git',
-                branch: 'main'
-            }
-        }
+        // stage('Checkout K8S manifest SCM'){
+        //     steps {
+        //         git credentialsId: 'c8504e4b-0804-4553-8ca8-9baa671c16e5', 
+        //         url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo.git',
+        //         branch: 'main'
+        //     }
+        // }
         
-        stage('Update K8S manifest & push to Repo'){
-            steps {
-                script{
-                    withCredentials([usernamePassword(credentialsId: 'c8504e4b-0804-4553-8ca8-9baa671c16e5', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh '''
-                        cat deploy.yaml
-                        sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
-                        cat deploy.yaml
-                        git add deploy.yaml
-                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
-                        git remote -v
-                        git push https://github.com/vikramvimal/cicd-demo-manifests-repo.git HEAD:main
-                        '''                        
-                    }
-                }
-            }
-        }
+        // stage('Update K8S manifest & push to Repo'){
+        //     steps {
+        //         script{
+        //             withCredentials([usernamePassword(credentialsId: 'c8504e4b-0804-4553-8ca8-9baa671c16e5', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+        //                 sh '''
+        //                 cat deploy.yaml
+        //                 sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
+        //                 cat deploy.yaml
+        //                 git add deploy.yaml
+        //                 git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
+        //                 git remote -v
+        //                 git push https://github.com/vikramvimal/cicd-demo-manifests-repo.git HEAD:main
+        //                 '''                        
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
