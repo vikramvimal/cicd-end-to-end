@@ -15,7 +15,7 @@ pipeline {
         
         stage('Checkout'){
            steps {
-                git credentialsId: 'c8504e4b-0804-4553-8ca8-9baa671c16e5', 
+                git credentialsId: '24f6aa2e-349f-4fa0-ac73-d2c2acf8ab81', 
                 url: 'https://github.com/vikramvimal/cicd-end-to-end',
                 branch: 'main'
            }
@@ -45,7 +45,7 @@ pipeline {
         
         // stage('Checkout K8S manifest SCM'){
         //     steps {
-        //         git credentialsId: 'c8504e4b-0804-4553-8ca8-9baa671c16e5', 
+        //         git credentialsId: '24f6aa2e-349f-4fa0-ac73-d2c2acf8ab81', 
         //         url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo.git',
         //         branch: 'main'
         //     }
@@ -54,7 +54,7 @@ pipeline {
         // stage('Update K8S manifest & push to Repo'){
         //     steps {
         //         script{
-        //             withCredentials([usernamePassword(credentialsId: 'c8504e4b-0804-4553-8ca8-9baa671c16e5', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+        //             withCredentials([usernamePassword(credentialsId: '24f6aa2e-349f-4fa0-ac73-d2c2acf8ab81', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
         //                 sh '''
         //                 cat deploy.yaml
         //                 sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
