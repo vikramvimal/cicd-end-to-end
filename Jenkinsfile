@@ -1,11 +1,9 @@
 pipeline {
     
-  agent {
-    docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
-    } 
-  }
+    agent any
+    environment {
+        DOCKER_CREDENTIALS = credentials('docker-hub-creds') // Use the ID you set for your Docker Hub credentials
+    }
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
@@ -20,7 +18,16 @@ pipeline {
                 branch: 'main'
            }
         }
-
+        
+        stage('Build and Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
+                        // Your Docker build and push commands here
+                    }
+                }
+            }
+            
         stage('Build Docker'){
             steps{
                 script{
