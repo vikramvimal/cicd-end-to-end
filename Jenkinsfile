@@ -24,14 +24,10 @@ pipeline {
                     sh '''
                     echo 'Buid Docker Image'
                     docker build -t vikramvimal/cicd-e2e:${BUILD_NUMBER} .
-                    '''
-                }
-          script{
-                    sh '''
-                    echo 'Push to Repo'
                     docker push vikramvimal/cicd-e2e:${BUILD_NUMBER}
                     '''
                 }
+          
       }
     }
 
