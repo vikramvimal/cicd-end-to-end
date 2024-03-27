@@ -29,7 +29,7 @@ pipeline {
           script{
                     sh '''
                     echo 'Push to Repo'
-                    docker push avikramvimal/cicd-e2e:${BUILD_NUMBER}
+                    docker push vikramvimal/cicd-e2e:${BUILD_NUMBER}
                     '''
                 }
       }
