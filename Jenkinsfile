@@ -23,11 +23,10 @@ pipeline {
         script {
             docker build -t vikramvimal/cicd-e2e:${BUILD_NUMBER} .'
             
-            docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
+            docker.withRegistry('https://index.docker.io/v1/', "docker-cred")
             docker push vikramvimal/cicd-e2e:${BUILD_NUMBER}
             }
         }
-      }
     }
 
 
