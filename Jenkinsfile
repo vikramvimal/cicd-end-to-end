@@ -9,7 +9,6 @@ pipeline {
     
     environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
     }
     
     stages {
