@@ -3,9 +3,6 @@ pipeline {
     agent any
     environment {
         DOCKER_CREDENTIALS = credentials('docker-hub-creds') // Use the ID you set for your Docker Hub credentials
-    }
-    
-    environment {
         IMAGE_TAG = "${BUILD_NUMBER}"
     }
     
