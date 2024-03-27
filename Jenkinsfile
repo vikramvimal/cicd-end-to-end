@@ -18,16 +18,13 @@ pipeline {
         
 
     stage('Build and Push Docker Image') {
-      environment {
-        DOCKER_IMAGE = "vikramvimal/cicd-e2e:${BUILD_NUMBER}"
-        REGISTRY_CREDENTIALS = credentials('docker-cred')
-      }
+
       steps {
         script {
-            docker build -t ${DOCKER_IMAGE} .'
-            def dockerImage = docker.image("${DOCKER_IMAGE}")
+            docker build -t vikramvimal/cicd-e2e:${BUILD_NUMBER} .'
+            
             docker.withRegistry('https://index.docker.io/v1/', "docker-cred") {
-                dockerImage.push()
+            docker push vikramvimal/cicd-e2e:${BUILD_NUMBER}
             }
         }
       }
