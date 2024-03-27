@@ -20,13 +20,19 @@ pipeline {
     stage('Build and Push Docker Image') {
 
       steps {
-        script {
-            docker build -t vikramvimal/cicd-e2e:${BUILD_NUMBER} .'
-            
-            docker.withRegistry('https://index.docker.io/v1/', "docker-cred")
-            docker push vikramvimal/cicd-e2e:${BUILD_NUMBER}
-            }
-        }
+        script{
+                    sh '''
+                    echo 'Buid Docker Image'
+                    docker build -t vikramvimal/cicd-e2e:${BUILD_NUMBER} .
+                    '''
+                }
+          script{
+                    sh '''
+                    echo 'Push to Repo'
+                    docker push avikramvimal/cicd-e2e:${BUILD_NUMBER}
+                    '''
+                }
+      }
     }
 
 
