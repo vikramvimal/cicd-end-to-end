@@ -19,15 +19,7 @@ pipeline {
            }
         }
         
-        stage('Build and Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
-                        // Your Docker build and push commands here
-                    }
-                }
-            }
-            
+                    
         stage('Build Docker'){
             steps{
                 script{
