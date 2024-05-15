@@ -11,8 +11,8 @@ pipeline {
         stage('Checkout'){
            steps {
                 sh 'echo passed'
-                // url: 'https://github.com/vikramvimal/cicd-end-to-end',
-                // branch: 'main'
+                url: 'https://github.com/vikramvimal/cicd-end-to-end',
+                branch: 'main'
            }
         }
         
