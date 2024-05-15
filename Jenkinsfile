@@ -17,29 +17,27 @@ pipeline {
         }
         
 
-    stage('Build and Push Docker Image') {
+        stage('Build and Push Docker Image') {
 
-      steps {
-        script{
+            steps {
+                script{
                     sh 'docker build -t ${DOCKER_IMAGE} .'
                     def dockerImage = docker.image("${DOCKER_IMAGE}")
                     docker.withRegistry('https://index.docker.io/v1/', "docker-hub-creds") {
-                      dockerImage.push()
+                        dockerImage.push()
                     }
                 }
             }
-    }
+        }
 
-        
-    stage('Checkout K8S manifest SCM'){
+        stage('Checkout K8S manifest SCM'){
             steps {
                 git credentialsId: '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', 
                 url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo',
                 branch: 'main'
             }
         }
-    
-        
+
         stage('Update K8S manifest & push to Repo'){
             steps {
                 script{
@@ -58,4 +56,4 @@ pipeline {
             }
         }
     }
-
+}
