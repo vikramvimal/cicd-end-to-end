@@ -11,6 +11,7 @@ pipeline {
         stage('Checkout'){
            steps {
                 sh 'echo passed'
+                git credentialsId: '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',
                 url: 'https://github.com/vikramvimal/cicd-end-to-end',
                 branch: 'main'
            }
