@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout'){
            steps {
                 sh 'echo passed'
-                // url: 'https://github.com/vikramvimal/cicd-end-to-end.git',
+                // url: 'https://github.com/vikramvimal/cicd-end-to-end',
                 // branch: 'main'
            }
         }
@@ -34,7 +34,7 @@ pipeline {
     stage('Checkout K8S manifest SCM'){
             steps {
                 git credentialsId: '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', 
-                url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo.git',
+                url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo',
                 branch: 'main'
             }
         }
