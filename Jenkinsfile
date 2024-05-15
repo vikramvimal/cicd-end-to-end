@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout'){
            steps {
                 sh 'echo passed'
-                git credentialsId: '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',
+                git credentialsId: 'github',
                 url: 'https://github.com/vikramvimal/cicd-end-to-end',
                 branch: 'main'
            }
@@ -45,7 +45,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
                         cat deploy.yaml
-                        sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
+                        sed -i '' "s/v1/${BUILD_NUMBER}/g" deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
