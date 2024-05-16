@@ -34,7 +34,7 @@ pipeline {
         stage('Checkout K8S manifest SCM'){
             steps {
                 git credentialsId: 'github', 
-                url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo',
+                url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo/todo-application',
                 branch: 'main'
             }
         }
@@ -44,7 +44,7 @@ pipeline {
                 script{
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh '''
-                        sed -i "s/14/v${BUILD_NUMBER}/g" deploy.yaml
+                        sed -i "s/15/v${BUILD_NUMBER}/g" deploy.yaml
                         cat deploy.yaml
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
