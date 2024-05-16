@@ -2,7 +2,7 @@ pipeline {
     
     agent any
     environment {
-        REGISTRY_CREDENTIALS = credentials('docker-hub-creds') // Use the ID you set for your Docker Hub credentials
+        REGISTRY_CREDENTIALS = credentials('docker-hub-creds') // Use ID you set for your Docker Hub credentials
         DOCKER_IMAGE = "vikramvimal/cicd-e2e:${BUILD_NUMBER}"
     }
     
