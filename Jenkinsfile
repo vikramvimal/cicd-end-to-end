@@ -34,7 +34,7 @@ pipeline {
         stage('Checkout K8S manifest SCM'){
             steps {
                 git credentialsId: 'github', 
-                url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo/todo-application',
+                url: 'https://github.com/vikramvimal/cicd-demo-manifests-repo',
                 branch: 'main'
             }
         }
